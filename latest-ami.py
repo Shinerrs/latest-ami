@@ -55,6 +55,8 @@ filters = [ {
     } ]
  
 response = client.describe_images(Owners=['amazon'], Filters=filters)
- 
-source_image = newest_image(response['Images'])
-print(source_image['ImageId'])
+if response['Images']:
+    source_image = newest_image(response['Images'])
+    print(source_image['ImageId'])
+else:
+    print "AMI list returned empty."
